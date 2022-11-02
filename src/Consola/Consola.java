@@ -63,10 +63,12 @@ public class Consola {
                         numTriangulos = scanner.nextInt();
                         System.out.println("Inserte el número de cuadrados que desee crear");
                         numCuadrados = scanner.nextInt();
+                        this.clearConsola();
                         this.crearCirculos(numCirculos);
                         this.crearCuadrados(numCuadrados);
                         this.crearTriangulos(numTriangulos);
                         System.out.println(this.devolverCaracteristicasFiguras());
+                        this.imprimirMenu();
 
                         break;
 
@@ -81,6 +83,7 @@ public class Consola {
                 }
 
                 this.limpiarFiguras(); //Borramos las figuras almacenadas
+
 
             } catch (InputMismatchException e) { //Ocurre cuando metemos un caracter dierente a un número
                 this.clearConsola();
