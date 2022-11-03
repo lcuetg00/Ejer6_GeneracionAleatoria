@@ -2,6 +2,7 @@ package Figuras.FiguraGeometrica;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.security.InvalidParameterException;
 
 import Utilidades.Utileria;
 
@@ -10,9 +11,12 @@ import Utilidades.Utileria;
  * -Calcular perímetro, área
  */
 public class Circulo implements FiguraGeometrica{
+    /**
+     * Valor de PI utilizado para la clase Círculo
+     */
     public static final BigDecimal piCirculo = new BigDecimal(Math.PI);
-    BigDecimal radio;
-    BigDecimal diametro;
+    private BigDecimal radio;
+    private BigDecimal diametro;
 
 
     /**
@@ -31,11 +35,11 @@ public class Circulo implements FiguraGeometrica{
      * Constructor de círculo para construirlo con su radio.
      * A partir del radio crea el diámetro.
      * @param radio medida del radio del círculo a crear
-     * @throws NullPointerException
+     * @throws InvalidParameterException
      */
-    public Circulo(BigDecimal radio) throws NullPointerException{
+    public Circulo(BigDecimal radio) throws InvalidParameterException{
         if(radio == null) {
-            throw new NullPointerException("Error en la creación de una instancia de la clase Circulo. El parámetro radio es null");
+            throw new InvalidParameterException("Error en la creación de una instancia de la clase Circulo. El parámetro radio es null");
         }
         this.radio = radio;
         this.diametro = radio.multiply(new BigDecimal(2));

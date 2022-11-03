@@ -16,15 +16,35 @@ import java.util.Scanner;
  */
 public class Consola {
     //Opciones del menú
+    /**
+     * Representa la opción de crear figuras en el menú
+     */
     public static final int OPCIONCREAR = 1;
+    /**
+     * Representa la opción de salir en el menú
+     */
     public static final int OPCIONSALIR = 2;
 
     //Formato de texto
-    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m"; //Para que el texto tenga un fondo verde
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m"; //Para que el texto tenga un fondo amarillo
-    public static final String ANSI_RESET = "\u001B[0m"; //Para devolver el texto a la normalidad
+    /**
+     * Utilizada al imprimir por pantalla caracteres.
+     * Hace que el texto escrito tengan un fondo verde.
+     */
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    /**
+     * Utilizada al imprimir por pantalla caracteres.
+     * Hace que texto escrito tengan un fondo amarillo.
+     */
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    /**
+     * Utilizada al imprimir por pantalla caracteres.
+     * Hace que texto escrito tenga el formato por defecto.
+     */
+    public static final String ANSI_RESET = "\u001B[0m";
 
-    public ArrayList<FiguraGeometrica> figuras; //Lista que almacenará lass figuras que se creen
+
+    //Lista que almacenará lass figuras que se creen
+    private ArrayList<FiguraGeometrica> figuras;
 
 
     /**
@@ -42,18 +62,22 @@ public class Consola {
      */
     public void iniciarConsola() {
         Scanner scanner = new Scanner(System.in);
-        int opcion = 0; //Almacenará la opción del menú que introducirá el usuario
-
-        int numCirculos = 0; //Número de instancias Circulo a crear
-        int numTriangulos = 0; //Número de instancias Triangulo a crear
-        int numCuadrados = 0; //Número de instancias Cuadrado a crear
+        //Almacenará la opción del menú que introducirá el usuario
+        int opcion = 0;
+        //Número de instancias Circulo a crear
+        int numCirculos = 0;
+        //Número de instancias Triangulo a crear
+        int numTriangulos = 0;
+        //Número de instancias Cuadrado a crear
+        int numCuadrados = 0;
 
         System.out.println("Ejercicio 6: Generación Aleatoria");
         imprimirMenu();
 
         while (opcion != OPCIONSALIR) {
             try {
-                opcion = scanner.nextInt(); //Leemos la operación que quiere realizar el usuario
+                //Leemos la operación que quiere realizar el usuario
+                opcion = scanner.nextInt();
 
                 switch (opcion) {
                     case OPCIONCREAR:
@@ -81,18 +105,18 @@ public class Consola {
                         this.imprimirMenu();
                         System.out.println("ANSI_YELLOW_BACKGROUND + \"Opción tecleada incorrecta. Seleccione la primera o la segunda opción\" + ANSI_RESET");
                 }
+                //Borramos las figuras almacenadas
+                this.limpiarFiguras();
 
-                this.limpiarFiguras(); //Borramos las figuras almacenadas
-
-
-            } catch (InputMismatchException e) { //Ocurre cuando metemos un caracter dierente a un número
+            //Ocurre cuando metemos un caracter diferente a un número
+            } catch (InputMismatchException e) {
                 this.clearConsola();
                 this.imprimirMenu();
                 scanner.nextLine();
                 System.out.println(ANSI_YELLOW_BACKGROUND + "Opción tecleada incorrecta. Seleccione una de las opciones disponibles" + ANSI_RESET);
 
 
-            } catch (NullPointerException e){
+            } catch (Exception e){
                 System.out.println(e.toString());
             }
         }
@@ -110,7 +134,7 @@ public class Consola {
     }
 
     /**
-     *
+     * Devuelve un String con todas las carácteristicas de cada FiguraGeometrica
      * @return String con las características de todas las figuras geométricas creadas
      */
     public  String devolverCaracteristicasFiguras()
@@ -134,7 +158,8 @@ public class Consola {
         try {
             final String os = System.getProperty("os.name");
 
-            if(os.contains("Windows")) { //Para sistemas de Windows
+            if(os.contains("Windows")) {
+                //Para sistemas de Windows
                 //Para windos, ejecutamos el interpretador de lineas 'cmd'
                 //Luego le decimos que ejecute el comando '/c cls'
                 //Conectamos el output de ese comando con inheritIO() para limpiar la consola en Windows
@@ -145,13 +170,14 @@ public class Consola {
             //    Runtime.getRuntime().exec("clear");
             //}
         }
-        catch (final Exception e) { //Error producido en la entrada o salida
+        //Error producido en la entrada o salida
+        catch (final Exception e) {
             System.out.println(e.toString());
         }
     }
 
     /**
-     * Limpia la lista creada para almacenar las figuras creadas
+     * Limpia la lista creada (esta almacena las figuras creadas)
      */
     public void limpiarFiguras() {
         this.figuras = new ArrayList<FiguraGeometrica>();

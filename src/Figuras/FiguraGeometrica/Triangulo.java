@@ -1,19 +1,22 @@
 package Figuras.FiguraGeometrica;
 
 import Utilidades.Utileria;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Creación y operaciones con triángulos
  * -Calcular perímetro, área
  */
 public class Triangulo implements FiguraGeometrica{
+    /**
+     * Representa el número de lados que tiene un triángulo
+     */
     public static final int NUM_LADOS_TRIANGULO = 3;
-    ArrayList<BigDecimal> lados;
-    BigDecimal base; //lado base del triángulo
-    BigDecimal altura; //altura del lado base del triángulo
+    private ArrayList<BigDecimal> lados;
+    private BigDecimal base; //lado base del triángulo
+    private BigDecimal altura; //altura del lado base del triángulo
 
     /**
      * Constructor de Triangulo para construirlo con valores aleatorios (con el minimo y el maximo pasado por parámetro).
@@ -24,10 +27,10 @@ public class Triangulo implements FiguraGeometrica{
      * @param precision
      */
     public Triangulo(int min, int max, int precision) {
-        lados = new ArrayList<BigDecimal>();
         this.base = Utileria.devolverNumRandom(min, max, precision);
         this.altura = Utileria.devolverNumRandom(min, max, precision);
 
+        lados = new ArrayList<BigDecimal>();
         this.lados.add(base);
         this.lados.add(Utileria.devolverNumRandom(min, max, precision));
         this.lados.add(Utileria.devolverNumRandom(min, max, precision));
@@ -39,14 +42,11 @@ public class Triangulo implements FiguraGeometrica{
      * @param listaLados lista con todos los lados del triángulo
      * @param altura altura del triángulo en cuanto a la base argumentada
      * @param base medida de la base del triángulo
-     * @throws NullPointerException Si la lista argumentada es null
      * @throws IllegalArgumentException Si la lista contene menos de 3 lados o más de 3 lados
      */
     public Triangulo(ArrayList<BigDecimal> listaLados, BigDecimal altura, BigDecimal base) throws NullPointerException, IllegalArgumentException{
-        if((listaLados == null) || (altura == null) || (base == null)) {
-            throw new NullPointerException("Error en la creación de una instancia de la clase Triangulo, al menos un parámetro es igual a null");
-        } else if(listaLados.size() != NUM_LADOS_TRIANGULO) {
-            throw new IllegalArgumentException("Error en la creación de una instancia de la clase Triangulo. La lista de lados no contiene 3 lados");
+        if((listaLados == null) || (altura == null) || (base == null) || (listaLados.size() != NUM_LADOS_TRIANGULO)) {
+            throw new IllegalArgumentException("Error en la creación de una instancia de la clase Triangulo, uno de sus parámetros es null o la lista de lados no contiene 3 lados");
         }
 
         this.lados = listaLados;

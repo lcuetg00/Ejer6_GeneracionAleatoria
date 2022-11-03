@@ -22,6 +22,6 @@ public class Utileria {
     public static BigDecimal devolverNumRandom(int min, int max, int precision) {
         Random random = new Random();
         double num = random.nextDouble(min, max);
-        return new BigDecimal(num).setScale(precision, RoundingMode.HALF_UP);
+        return new BigDecimal(Double.toString(num)).setScale(precision, RoundingMode.HALF_UP);
     }
 }
