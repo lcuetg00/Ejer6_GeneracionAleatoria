@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.InvalidParameterException;
 
+import Consola.Consola;
 import Utilidades.Utileria;
 
 /**
@@ -26,9 +27,9 @@ public class Circulo implements FiguraGeometrica{
      * @param max
      * @param precision
      */
-    public Circulo(int min, int max, int precision) {
+    public Circulo(final int min, final int max, final int precision) {
         this.radio = Utileria.devolverNumRandom(min, max, precision);
-        this.diametro = radio.multiply(new BigDecimal(2));
+        this.diametro = radio.multiply(new BigDecimal("2"));
     }
 
     /**
@@ -37,7 +38,7 @@ public class Circulo implements FiguraGeometrica{
      * @param radio medida del radio del círculo a crear
      * @throws InvalidParameterException
      */
-    public Circulo(BigDecimal radio) throws InvalidParameterException{
+    public Circulo(final BigDecimal radio) throws InvalidParameterException{
         if(radio == null) {
             throw new InvalidParameterException("Error en la creación de una instancia de la clase Circulo. El parámetro radio es null");
         }
@@ -73,11 +74,11 @@ public class Circulo implements FiguraGeometrica{
     @Override
     public String toString() {
         StringBuilder caracteristicas = new StringBuilder();
-        caracteristicas.append("Círculo\n");
-        caracteristicas.append("Radio: " + this.radio + " cm\n");
-        caracteristicas.append("Diámetro: " + this.diametro + " cm\n");
-        caracteristicas.append("Perimetro: " + this.calcularPerimetro() + " cm\n");
-        caracteristicas.append("Área: " + this.calcularArea() + " cm\n");
+        caracteristicas.append("Círculo" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Radio: " + this.radio + " cm" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Diámetro: " + this.diametro + " cm" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Perimetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
 
         return caracteristicas.toString();
     }

@@ -7,9 +7,23 @@ import java.util.Random;
 
 public class Utileria {
     //Usado para la creación de números random para las características de las figuras
+    /**
+     * Utilizada para poner por defecto el número mínimo que puede ser sacado al azar
+     */
     public static final int NUMALEATORIO_MIN = 1;
+    /**
+     *
+     */
     public static final int NUMALEATORIO_MAX = 10;
+    /**
+     * Número de decimales predeterminado
+     */
     public static final int PRECISION_DECIMALES = 2;
+
+    //Constructor privado
+    //Utilizado para prevenir crear instancias de esta clase ya que sus métodos son todos estáticos
+    private Utileria() {
+    }
 
     /**
      * Devuelve un BigDecimal creado al azar contenido entre 'min' y 'max'.

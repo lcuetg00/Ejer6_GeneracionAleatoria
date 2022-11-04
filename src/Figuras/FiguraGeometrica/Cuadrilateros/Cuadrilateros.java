@@ -12,7 +12,7 @@ import java.util.List;
  * -Forma de cacular su perímetro.
  */public abstract class Cuadrilateros implements FiguraGeometrica {
     //Lista que contendrá los 4 lados de un cuadrilátero
-    protected ArrayList<BigDecimal> lados;
+    protected List<BigDecimal> lados;
     /**
      * Representa el número de lados que tiene un cuadrilátero
      */

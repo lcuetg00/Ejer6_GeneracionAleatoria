@@ -1,5 +1,6 @@
 package Figuras.FiguraGeometrica.Cuadrilateros;
 
+import Consola.Consola;
 import Utilidades.Utileria;
 
 import java.math.BigDecimal;
@@ -16,35 +17,12 @@ public class Cuadrado extends Cuadrilateros {
      * @param max
      * @param precision
      */
-    public Cuadrado(int min, int max, int precision) {
+    public Cuadrado(final int min, final int max, final int precision) {
         lados = new ArrayList<BigDecimal>();
         BigDecimal lado = Utileria.devolverNumRandom(min, max, precision);
         for(int i=0;i<Cuadrilateros.NUM_LADOS_CUADRILATERO;i++) {
             this.lados.add(lado);
         }
-    }
-
-    /**
-     * Contructor para construir un Cuadrado con una lista de 4 lados iguales.
-     * @param listaLados
-     * @throws IllegalArgumentException si la listaLados es null
-     *                                  si listaLados tiene más de 4 o menos de 4 lados.
-     *                                  si hay al menos un BigDecimal de la lista diferente al otro
-     *
-     */
-    public Cuadrado(ArrayList<BigDecimal> listaLados) throws NullPointerException, IllegalArgumentException {
-        if((listaLados == null) || (listaLados.size() != NUM_LADOS_CUADRILATERO)) {
-            throw new NullPointerException("Error en la creación de una instancia de la clase Cuadrado, la lista de lados es null o no contiene 4 lados");
-        }
-        //Comprobamos si todos los lados son iguales:
-        BigDecimal ladoCuadrado = listaLados.get(0);
-        for(int i=0;i<listaLados.size();i++) {
-            if(ladoCuadrado != listaLados.get(i)) { // No son todos iguales
-                throw new IllegalArgumentException("Error en la creación de una isntancia de la clase Cuadrado, los 4 lados no son iguales");
-            }
-        }
-
-        this.lados = lados;
     }
 
     /**
@@ -54,7 +32,7 @@ public class Cuadrado extends Cuadrilateros {
      */
     public Cuadrado(BigDecimal lado) {
         if(lado == null) {
-            throw new NullPointerException("El parámetro lado de la clase Cuadrado es null");
+            throw new NullPointerException("Clase Cuadrado: el parámetro lado en su constructor es null");
         }
         for(int i=0;i<NUM_LADOS_CUADRILATERO;i++) {
             this.lados.add(lado);
@@ -85,11 +63,11 @@ public class Cuadrado extends Cuadrilateros {
         }
         caracteristicas.append("Cuadrado\n");
         for(int i=0;i<this.lados.size();i++) {
-            caracteristicas.append("Lado "+ i +":" + lados.get(i).toString() + "cm\n");
+            caracteristicas.append("Lado "+ i +": " + lados.get(i).toString() + "cm" + Consola.RETORNO_CARRO);
 
         }
-        caracteristicas.append("Perimetro: " + this.calcularPerimetro() + " cm\n");
-        caracteristicas.append("Área: " + this.calcularArea() + " cm\n");
+        caracteristicas.append("Perimetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
 
         return caracteristicas.toString();
     }

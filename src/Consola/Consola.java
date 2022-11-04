@@ -41,6 +41,10 @@ public class Consola {
      * Hace que texto escrito tenga el formato por defecto.
      */
     public static final String ANSI_RESET = "\u001B[0m";
+    /**
+     * Retorno de carro proporcionado por el sistema que se esté utilizando
+     */
+    public static final String RETORNO_CARRO = System.getProperty("line.separator");
 
 
     //Lista que almacenará lass figuras que se creen
