@@ -29,6 +29,7 @@ public class Circulo implements FiguraGeometrica{
      */
     public Circulo(final int min, final int max, final int precision) {
         this.radio = Utileria.devolverNumRandom(min, max, precision);
+        //El diámetro del círculo es el doble que el radio
         this.diametro = radio.multiply(new BigDecimal("2"));
     }
 
@@ -36,7 +37,7 @@ public class Circulo implements FiguraGeometrica{
      * Constructor de círculo para construirlo con su radio.
      * A partir del radio crea el diámetro.
      * @param radio medida del radio del círculo a crear
-     * @throws InvalidParameterException
+     * @throws InvalidParameterException si el parámetro radio es null
      */
     public Circulo(final BigDecimal radio) throws InvalidParameterException{
         if(radio == null) {

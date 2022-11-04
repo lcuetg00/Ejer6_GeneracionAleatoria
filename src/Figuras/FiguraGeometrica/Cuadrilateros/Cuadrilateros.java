@@ -11,14 +11,15 @@ import java.util.List;
  * -Tienen 4 lados
  * -Forma de cacular su perímetro.
  */public abstract class Cuadrilateros implements FiguraGeometrica {
-    //Lista que contendrá los 4 lados de un cuadrilátero
+    /**
+     * Lista que contendrá los 4 lados de un cuadrilátero
+     */
     protected List<BigDecimal> lados;
     /**
      * Representa el número de lados que tiene un cuadrilátero
      */
     public static final int NUM_LADOS_CUADRILATERO = 4;
 
-    //Implementamos el método común en todos los cuadriláteros, la forma de calcular su perímetro
     /**
      * Devuelve el perímetro con la forma de calcularla para los cuadriláteros
      * Perímetro = suma de todos sus lados

@@ -14,9 +14,14 @@ public class Triangulo implements FiguraGeometrica{
      * Representa el número de lados que tiene un triángulo
      */
     public static final int NUM_LADOS_TRIANGULO = 3;
+    /**
+     * Lista que contendrá los 3 lados de un triángulo
+     */
     private ArrayList<BigDecimal> lados;
-    private BigDecimal base; //lado base del triángulo
-    private BigDecimal altura; //altura del lado base del triángulo
+    //Lado base del triángulo
+    private BigDecimal base;
+    //Altura del lado base del triángulo
+    private BigDecimal altura;
 
     /**
      * Constructor de Triangulo para construirlo con valores aleatorios (con el minimo y el maximo pasado por parámetro).
