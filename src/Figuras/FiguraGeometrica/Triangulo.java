@@ -1,9 +1,8 @@
 package Figuras.FiguraGeometrica;
 
-import Utilidades.Utileria;
+import Utilidades.UtileriaNumeros;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Creación y operaciones con triángulos
@@ -32,13 +31,13 @@ public class Triangulo implements FiguraGeometrica{
      * @param precision
      */
     public Triangulo(int min, int max, int precision) {
-        this.base = Utileria.devolverNumRandom(min, max, precision);
-        this.altura = Utileria.devolverNumRandom(min, max, precision);
+        this.base = UtileriaNumeros.devolverNumRandom(min, max, precision);
+        this.altura = UtileriaNumeros.devolverNumRandom(min, max, precision);
 
         lados = new ArrayList<BigDecimal>();
         this.lados.add(base);
-        this.lados.add(Utileria.devolverNumRandom(min, max, precision));
-        this.lados.add(Utileria.devolverNumRandom(min, max, precision));
+        this.lados.add(UtileriaNumeros.devolverNumRandom(min, max, precision));
+        this.lados.add(UtileriaNumeros.devolverNumRandom(min, max, precision));
     }
 
     /**

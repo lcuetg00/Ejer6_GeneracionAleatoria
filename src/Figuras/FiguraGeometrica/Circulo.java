@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import java.security.InvalidParameterException;
 
 import Consola.Consola;
-import Utilidades.Utileria;
+import Utilidades.UtileriaNumeros;
 
 /**
  * Creación y operaciones con círculos
@@ -28,7 +28,7 @@ public class Circulo implements FiguraGeometrica{
      * @param precision
      */
     public Circulo(final int min, final int max, final int precision) {
-        this.radio = Utileria.devolverNumRandom(min, max, precision);
+        this.radio = UtileriaNumeros.devolverNumRandom(min, max, precision);
         //El diámetro del círculo es el doble que el radio
         this.diametro = radio.multiply(new BigDecimal("2"));
     }
@@ -54,7 +54,7 @@ public class Circulo implements FiguraGeometrica{
      */
     @Override
     public BigDecimal calcularPerimetro() {
-        return this.radio.multiply(BigDecimal.valueOf(Math.PI)).multiply(new BigDecimal(2)).setScale(Utileria.PRECISION_DECIMALES, RoundingMode.HALF_UP);
+        return this.radio.multiply(BigDecimal.valueOf(Math.PI)).multiply(new BigDecimal(2)).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Circulo implements FiguraGeometrica{
      */
     @Override
     public BigDecimal calcularArea() {
-        return this.radio.multiply(this.radio).multiply(piCirculo).setScale(Utileria.PRECISION_DECIMALES, RoundingMode.HALF_UP);
+        return this.radio.multiply(this.radio).multiply(piCirculo).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
     /**

@@ -4,7 +4,7 @@ import Figuras.FiguraGeometrica.Circulo;
 import Figuras.FiguraGeometrica.Cuadrilateros.Cuadrado;
 import Figuras.FiguraGeometrica.FiguraGeometrica;
 import Figuras.FiguraGeometrica.Triangulo;
-import Utilidades.Utileria;
+import Utilidades.UtileriaNumeros;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -194,7 +194,7 @@ public class Consola {
      */
     public void crearCirculos(int numCirculos) {
         for(int i=0;i<numCirculos;i++) {
-            this.figuras.add(new Circulo(Utileria.NUMALEATORIO_MIN, Utileria.NUMALEATORIO_MAX, Utileria.PRECISION_DECIMALES));
+            this.figuras.add(new Circulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.PRECISION_DECIMALES));
         }
 
     }
@@ -206,7 +206,7 @@ public class Consola {
      */
     public void crearTriangulos(int numTriangulos) {
         for(int i=0;i<numTriangulos;i++) {
-            this.figuras.add(new Triangulo(Utileria.NUMALEATORIO_MIN,Utileria.NUMALEATORIO_MAX,Utileria.PRECISION_DECIMALES));
+            this.figuras.add(new Triangulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.PRECISION_DECIMALES));
         }
 
     }
@@ -218,7 +218,7 @@ public class Consola {
      */
     public void crearCuadrados(int numCuadrados) {
         for(int i=0;i<numCuadrados;i++) {
-            this.figuras.add(new Cuadrado(Utileria.NUMALEATORIO_MIN,Utileria.NUMALEATORIO_MAX,Utileria.PRECISION_DECIMALES));
+            this.figuras.add(new Cuadrado(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.PRECISION_DECIMALES));
         }
 
     }

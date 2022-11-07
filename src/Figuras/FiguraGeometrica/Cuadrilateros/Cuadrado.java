@@ -1,12 +1,11 @@
 package Figuras.FiguraGeometrica.Cuadrilateros;
 
 import Consola.Consola;
-import Utilidades.Utileria;
+import Utilidades.UtileriaNumeros;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Cuadrado extends Cuadrilateros {
 
@@ -19,7 +18,7 @@ public class Cuadrado extends Cuadrilateros {
      */
     public Cuadrado(final int min, final int max, final int precision) {
         lados = new ArrayList<BigDecimal>();
-        BigDecimal lado = Utileria.devolverNumRandom(min, max, precision);
+        BigDecimal lado = UtileriaNumeros.devolverNumRandom(min, max, precision);
         for(int i=0;i<Cuadrilateros.NUM_LADOS_CUADRILATERO;i++) {
             this.lados.add(lado);
         }
@@ -47,7 +46,7 @@ public class Cuadrado extends Cuadrilateros {
     @Override
     public BigDecimal calcularArea() {
         BigDecimal ladoCuadrado = lados.get(0);
-        return ladoCuadrado.multiply(ladoCuadrado).setScale(Utileria.PRECISION_DECIMALES, RoundingMode.HALF_UP);
+        return ladoCuadrado.multiply(ladoCuadrado).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
     /**
