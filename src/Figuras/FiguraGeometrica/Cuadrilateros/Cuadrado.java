@@ -5,7 +5,12 @@ import Utilidades.UtileriaNumeros;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
+import java.security.InvalidParameterException;
+import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
 
 public class Cuadrado extends Cuadrilateros {
 
@@ -28,10 +33,11 @@ public class Cuadrado extends Cuadrilateros {
      * Constructor para construir un cuadrado con un solo lado.
      * Añade ese lado 4 veces a la lista de lados.
      * @param lado lado del cuadrado
+     * @throws InvalidParameterException si el parámetro lado es null
      */
-    public Cuadrado(BigDecimal lado) {
+    public Cuadrado(final BigDecimal lado) throws InvalidParameterException {
         if(lado == null) {
-            throw new NullPointerException("Clase Cuadrado: el parámetro lado en su constructor es null");
+            throw new InvalidParameterException("Clase Cuadrado: el parámetro lado en su constructor es null");
         }
         for(int i=0;i<NUM_LADOS_CUADRILATERO;i++) {
             this.lados.add(lado);
@@ -45,8 +51,19 @@ public class Cuadrado extends Cuadrilateros {
      */
     @Override
     public BigDecimal calcularArea() {
+        if(lados == null) {
+            //tirar excepcion
+        }
         BigDecimal ladoCuadrado = lados.get(0);
+        if(ladoCuadrado == null) {
+            //tirar excepcion
+        }
         return ladoCuadrado.multiply(ladoCuadrado).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
+    }
+
+    @Override
+    public String devolverMetadatos() {
+        return null;
     }
 
     /**
@@ -58,16 +75,36 @@ public class Cuadrado extends Cuadrilateros {
     public String toString() {
         StringBuilder caracteristicas = new StringBuilder();
         if(lados == null) {
-            throw new NullPointerException("Clase cuadrado toString: la lista de lados está vacía");
+            //throw new NullPointerException("Clase cuadrado toString: la lista de lados está vacía");
         }
-        caracteristicas.append("Cuadrado\n");
+        caracteristicas.append("Cuadrado ");
         for(int i=0;i<this.lados.size();i++) {
-            caracteristicas.append("Lado "+ i +": " + lados.get(i).toString() + "cm" + Consola.RETORNO_CARRO);
-
+            caracteristicas.append("Lado "+ i +": " + lados.get(i).toString() + " ");
         }
-        caracteristicas.append("Perimetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
-        caracteristicas.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " ");
+        caracteristicas.append("Área: " + this.calcularArea());
 
         return caracteristicas.toString();
+    }
+
+    /**
+     * Devuelve el lado de la lista en la posición de index
+     * @param index
+     * @return
+     * @throws InvalidParameterException si el index se sale del tamaño de la lista
+     */
+    public BigDecimal getLado(int index) throws InvalidParameterException{
+        if(index < 0 || index>lados.size()) {
+            throw new InvalidParameterException("Clase Cuadrado: getLado(int index) su index es menor que 0 o se sale de la longitud de la lista");
+        }
+        return lados.get(index);
+    }
+
+    /**
+     * Devuelve el tamaño de la lista 'lados'
+     * @return
+     */
+    public int getSizeLados() {
+        return lados.size();
     }
 }

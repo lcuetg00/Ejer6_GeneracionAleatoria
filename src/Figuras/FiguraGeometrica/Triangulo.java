@@ -2,7 +2,9 @@ package Figuras.FiguraGeometrica;
 
 import Utilidades.UtileriaNumeros;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
+import java.math.MathContext;
 
 /**
  * Creación y operaciones con triángulos
@@ -17,10 +19,6 @@ public class Triangulo implements FiguraGeometrica{
      * Lista que contendrá los 3 lados de un triángulo
      */
     private ArrayList<BigDecimal> lados;
-    //Lado base del triángulo
-    private BigDecimal base;
-    //Altura del lado base del triángulo
-    private BigDecimal altura;
 
     /**
      * Constructor de Triangulo para construirlo con valores aleatorios (con el minimo y el maximo pasado por parámetro).
@@ -31,15 +29,12 @@ public class Triangulo implements FiguraGeometrica{
      * @param precision
      */
     public Triangulo(int min, int max, int precision) {
-        this.base = UtileriaNumeros.devolverNumRandom(min, max, precision);
-        this.altura = UtileriaNumeros.devolverNumRandom(min, max, precision);
-
         lados = new ArrayList<BigDecimal>();
-        this.lados.add(base);
-        this.lados.add(UtileriaNumeros.devolverNumRandom(min, max, precision));
-        this.lados.add(UtileriaNumeros.devolverNumRandom(min, max, precision));
+        for(int i=0;i<NUM_LADOS_TRIANGULO;i++) {
+            this.lados.add(UtileriaNumeros.devolverNumRandom(min, max, precision));
+        }
     }
-
+/*
     /**
      * Constructor para crear una instancia Triangulo con una lista de lados
      * La lista debe de contener 3 lados
@@ -53,8 +48,8 @@ public class Triangulo implements FiguraGeometrica{
             throw new IllegalArgumentException("Error en la creación de una instancia de la clase Triangulo, uno de sus parámetros es null o la lista de lados no contiene 3 lados");
         }
 
-        this.lados = listaLados;
-        this.altura=altura;
+        //this.lados = listaLados;
+        //this.altura=altura;
     }
 
     /**
@@ -73,12 +68,27 @@ public class Triangulo implements FiguraGeometrica{
 
     /**
      * Devuelve el área con la forma de calcularla para los triángulos
-     * Área = (Base * Altura)/2
+     * Utiliza la formula de heron
+     * Semiperimetro (S) = (lado1 + lado2 + lado3)/2
+     * Área = squareroot(S * (S - lado1) (S - lado2) (S - lado3))
      * @return area del triángulo
      */
     @Override
     public BigDecimal calcularArea() {
-        return base.multiply(altura).multiply(BigDecimal.valueOf(2));
+        //El semiperimetro es la mitad del perímetro del triángulo
+        BigDecimal semiperimetro = this.calcularPerimetro().divide(new BigDecimal("2"));
+        BigDecimal area;
+        area = semiperimetro;
+        for(BigDecimal lado : this.lados) {
+            area = area.multiply((semiperimetro.subtract(lado)));
+        }
+        //area = area.pow(-2);
+        return area;
+    }
+
+    @Override
+    public String devolverMetadatos() {
+        return null;
     }
 
     /**

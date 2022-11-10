@@ -8,5 +8,6 @@ import java.math.BigDecimal;
 public interface FiguraGeometrica {
     public BigDecimal calcularPerimetro();
     public BigDecimal calcularArea();
+    public String devolverMetadatos();
 
 }

@@ -67,6 +67,11 @@ public class Circulo implements FiguraGeometrica{
         return this.radio.multiply(this.radio).multiply(piCirculo).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
+    @Override
+    public String devolverMetadatos() {
+        return null;
+    }
+
     /**
      * Devuelve un String con todas las características geométricas de un círculos.
      * Radio, diámetro, perímetro y área
