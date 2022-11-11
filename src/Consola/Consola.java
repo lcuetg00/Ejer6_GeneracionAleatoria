@@ -6,6 +6,8 @@ import Figuras.FiguraGeometrica.IFiguraGeometrica;
 import Figuras.FiguraGeometrica.Triangulo;
 import Utilidades.UtileriaNumeros;
 
+import java.lang.reflect.Constructor;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -73,8 +75,6 @@ public class Consola {
         figuras = new ArrayList<IFiguraGeometrica>();
     }
 
-
-
     /**
      * Inicia la interfaz de la consola.
      * Presenta el menú al usuario, lee sus entradas y realiza las operaciones necesarias
@@ -107,9 +107,17 @@ public class Consola {
                         System.out.println("Inserte el número de cuadrados que desee crear");
                         numCuadrados = scanner.nextInt();
                         this.clearConsola();
-                        this.crearCirculos(numCirculos);
-                        this.crearCuadrados(numCuadrados);
-                        //this.crearTriangulos(numTriangulos);
+
+                        //Creación de las instancias e insertado en la lista 'figuras'
+                        for(int i=0;i<numCirculos;i++) {
+                            this.insertarFiguraLista(new Circulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.NUMALEATORIO_MIN));
+                        }
+                        for(int i=0;i<numCuadrados;i++) {
+                            this.insertarFiguraLista(new Cuadrado(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.NUMALEATORIO_MIN));
+                        }
+                        //for(int i=0;i<numTriangulos;i++) {
+                        //    this.insertarFiguraLista(new Triangulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.NUMALEATORIO_MIN));
+                        //}
                         for(IFiguraGeometrica figura : this.figuras) {
                             System.out.println("________________");
                             this.imprimirCaracteristicasFiguras(figura);
@@ -186,8 +194,31 @@ public class Consola {
                 System.out.println("Perímetro: " + ANSI_GREEN_BACKGROUND +cuadrado.calcularPerimetro() + " cm" + ANSI_RESET);
                 System.out.println("Área: " + ANSI_GREEN_BACKGROUND + cuadrado.calcularArea() + " cm" + ANSI_RESET);
                 break;
+
+            default:
+                System.out.println("No hay características para esta figura");
+                break;
         }
 
+    }
+
+    /**
+     * Limpia la lista creada (esta almacena las figuras creadas)
+     */
+    public void limpiarFiguras() {
+        this.figuras = new ArrayList<IFiguraGeometrica>();
+    }
+
+    /**
+     * Inserta en 'lista' una IFiguraGeometrica
+     * @param figura
+     * @throws InvalidParameterException
+     */
+    public void insertarFiguraLista(final IFiguraGeometrica figura) throws InvalidParameterException {
+        if(figura == null) {
+            throw new InvalidParameterException("Clase Consola: insertarFiguraLista: la figura introducida es null");
+        }
+        this.figuras.add(figura);
     }
 
     /**
@@ -215,46 +246,4 @@ public class Consola {
         }
     }
 
-    /**
-     * Limpia la lista creada (esta almacena las figuras creadas)
-     */
-    public void limpiarFiguras() {
-        this.figuras = new ArrayList<IFiguraGeometrica>();
-    }
-
-    /**
-     * Crea y añade a la lista figuras el número de circulos en numCirculos.
-     * Los circulos tendrán valores aleatorios para sus características
-     * @param numCirculos
-     */
-    public void crearCirculos(int numCirculos) {
-        for(int i=0;i<numCirculos;i++) {
-            this.figuras.add(new Circulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.PRECISION_DECIMALES));
-        }
-
-    }
-
-    /**
-     * Crea y añade a la lista figuras el número de triángulos en numTriangulos.
-     * Los triangulos tendrán valores aleatorios para sus características
-     * @param numTriangulos
-     */
-    public void crearTriangulos(int numTriangulos) {
-        for(int i=0;i<numTriangulos;i++) {
-            this.figuras.add(new Triangulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.PRECISION_DECIMALES));
-        }
-
-    }
-
-    /**
-     * Crea y añade a la lista figuras el número de cuadrados en numCuadrados.
-     * Los cuadrados tendrán valores aleatorios para sus características
-     * @param numCuadrados
-     */
-    public void crearCuadrados(int numCuadrados) {
-        for(int i=0;i<numCuadrados;i++) {
-            this.figuras.add(new Cuadrado(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.PRECISION_DECIMALES));
-        }
-
-    }
 }

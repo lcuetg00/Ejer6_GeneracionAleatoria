@@ -9,7 +9,6 @@ import Utilidades.UtileriaNumeros;
 
 /**
  * Creación y operaciones con círculos
- * -Calcular perímetro, área
  */
 public class Circulo implements IFiguraGeometrica {
     /**

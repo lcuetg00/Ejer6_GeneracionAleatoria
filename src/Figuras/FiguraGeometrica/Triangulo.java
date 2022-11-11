@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 /**
  * Creación y operaciones con triángulos
- * -Calcular perímetro, área
  */
 public class Triangulo implements IFiguraGeometrica {
     /**
@@ -35,13 +34,16 @@ public class Triangulo implements IFiguraGeometrica {
         this.lados.add(lado1);
         BigDecimal lado2 = UtileriaNumeros.devolverNumRandom(min, max, precision);
         this.lados.add(lado2);
+
+        BigDecimal diferencia = lado1.subtract(lado2).abs();
+        BigDecimal lado3 = BigDecimal.ZERO;
         //Para que este triangulo exista, tiene que cumplir las Desigualdades de triángulo (Triangle Inequality)
-        //La suma de dos de sus lados, tienen que ser igual o mayor a su último lado
-        //lado1 + lado2 >= lado3
-        //Si lado1 + lado2 = lado3, su area seria 0
-        //lado 3 debe de cumplir: lado1 + lado3 >= lado 2 && lado2 + lado3 >= lado1
-        //BigDecimal lado3 = UtileriaNumeros.devolverNumRandom(0,30,2);
-        //this.lados.add(lado3);
+        //La suma de cualquiera de sus lados, tienen que ser igual o mayor a su último lado
+        //(lado3 < diferencia) || lado3 > lado1.add(lado2)
+        while((diferencia.compareTo(lado3) == 1) || (lado3.compareTo(lado1.add(lado2)))==1) {
+            lado3 = UtileriaNumeros.devolverNumRandom( lado1.add(lado2).intValue(), diferencia.intValue(), UtileriaNumeros.PRECISION_DECIMALES);
+        }
+        this.lados.add(lado3);
     }
 
     /**
@@ -102,7 +104,7 @@ public class Triangulo implements IFiguraGeometrica {
     public String devolverMetadatos() {
         StringBuilder metadatos = new StringBuilder();
         if((lados == null)) {
-            throw new NullPointerException("Clase Triandulo toString: la lista de lados es numm");
+            throw new NullPointerException("Clase Triandulo toString: la lista de lados es null");
         }
         metadatos.append("Triángulo" + Consola.RETORNO_CARRO);
         metadatos.append("Lados:" + Consola.RETORNO_CARRO);

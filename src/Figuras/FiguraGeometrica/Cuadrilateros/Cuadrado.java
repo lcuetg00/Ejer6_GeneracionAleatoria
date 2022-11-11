@@ -12,6 +12,10 @@ import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
+/**
+ * Creación y operaciones con cuadrados
+ */
+
 public class Cuadrado extends Cuadrilateros {
 
     /**
