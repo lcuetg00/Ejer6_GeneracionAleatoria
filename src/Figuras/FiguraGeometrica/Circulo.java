@@ -11,7 +11,7 @@ import Utilidades.UtileriaNumeros;
  * Creación y operaciones con círculos
  * -Calcular perímetro, área
  */
-public class Circulo implements FiguraGeometrica{
+public class Circulo implements IFiguraGeometrica {
     /**
      * Valor de PI utilizado para la clase Círculo
      */

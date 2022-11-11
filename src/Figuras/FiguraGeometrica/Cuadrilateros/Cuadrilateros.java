@@ -1,9 +1,8 @@
 package Figuras.FiguraGeometrica.Cuadrilateros;
 import Consola.Consola;
-import Figuras.FiguraGeometrica.FiguraGeometrica;
+import Figuras.FiguraGeometrica.IFiguraGeometrica;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +10,7 @@ import java.util.List;
  * Todos los cuadriláteros tienen en común:
  * -Tienen 4 lados
  * -Forma de cacular su perímetro.
- */public abstract class Cuadrilateros implements FiguraGeometrica {
+ */public abstract class Cuadrilateros implements IFiguraGeometrica {
     /**
      * Lista que contendrá los 4 lados de un cuadrilátero
      */

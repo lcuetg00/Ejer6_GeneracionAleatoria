@@ -3,16 +3,14 @@ package Figuras.FiguraGeometrica;
 import Consola.Consola;
 import Utilidades.UtileriaNumeros;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.math.MathContext;
 
 /**
  * Creación y operaciones con triángulos
  * -Calcular perímetro, área
  */
-public class Triangulo implements FiguraGeometrica{
+public class Triangulo implements IFiguraGeometrica {
     /**
      * Representa el número de lados que tiene un triángulo
      */

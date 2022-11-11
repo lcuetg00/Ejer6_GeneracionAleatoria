@@ -2,7 +2,7 @@ package Consola;
 
 import Figuras.FiguraGeometrica.Circulo;
 import Figuras.FiguraGeometrica.Cuadrilateros.Cuadrado;
-import Figuras.FiguraGeometrica.FiguraGeometrica;
+import Figuras.FiguraGeometrica.IFiguraGeometrica;
 import Figuras.FiguraGeometrica.Triangulo;
 import Utilidades.UtileriaNumeros;
 
@@ -38,6 +38,21 @@ public class Consola {
     public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
     /**
      * Utilizada al imprimir por pantalla caracteres.
+     * Hace que texto escrito tengan un color rojo.
+     */
+    public static final String ANSI_RED = "\u001B[31m";
+    /**
+     * Utilizada al imprimir por pantalla caracteres.
+     * Hace que texto escrito tengan un color azul.
+     */
+    public static final String ANSI_BLUE = "\u001B[34m";
+    /**
+     * Utilizada al imprimir por pantalla caracteres.
+     * Hace que texto escrito tengan un color azul.
+     */
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    /**
+     * Utilizada al imprimir por pantalla caracteres.
      * Hace que texto escrito tenga el formato por defecto.
      */
     public static final String ANSI_RESET = "\u001B[0m";
@@ -48,14 +63,14 @@ public class Consola {
 
 
     //Lista que almacenará lass figuras que se creen
-    private ArrayList<FiguraGeometrica> figuras;
+    private ArrayList<IFiguraGeometrica> figuras;
 
 
     /**
      * Contructor que crea la lista en la cual se almacenarán las figuras que se crearán.
      */
     public Consola() {
-        figuras = new ArrayList<FiguraGeometrica>();
+        figuras = new ArrayList<IFiguraGeometrica>();
     }
 
 
@@ -95,9 +110,11 @@ public class Consola {
                         this.crearCirculos(numCirculos);
                         this.crearCuadrados(numCuadrados);
                         //this.crearTriangulos(numTriangulos);
-                        for(FiguraGeometrica figura : this.figuras) {
+                        for(IFiguraGeometrica figura : this.figuras) {
+                            System.out.println("________________");
                             this.imprimirCaracteristicasFiguras(figura);
                         }
+                        System.out.println("________________");
                         this.imprimirMenu();
 
                         break;
@@ -139,10 +156,10 @@ public class Consola {
 
     }
 
-    public void imprimirCaracteristicasFiguras(final FiguraGeometrica figura) {
+    public void imprimirCaracteristicasFiguras(final IFiguraGeometrica figura) {
         switch(figura.getClass().getSimpleName()) {
             case "Circulo":
-                System.out.println("Circulo");
+                System.out.println(ANSI_RED + "Circulo" + ANSI_RESET);
                 Circulo circulo = ((Circulo) figura);
                 System.out.println("Radio: " + ANSI_GREEN_BACKGROUND + circulo.getRadio() + " cm" + ANSI_RESET);
                 System.out.println("Diámetro: " + ANSI_GREEN_BACKGROUND + circulo.getDiametro() + " cm" + ANSI_RESET);
@@ -151,7 +168,7 @@ public class Consola {
                 break;
 
             case "Triangulo":
-                System.out.println("Triángulo");
+                System.out.println(ANSI_BLUE +"Triángulo" + ANSI_RESET);
                 Triangulo triangulo = ((Triangulo) figura);
                 for(int i=0;i < triangulo.getSizeLados();i++) {
                     System.out.println("Lado "+ i +": " + ANSI_GREEN_BACKGROUND + triangulo.getLado(i) + "cm" + ANSI_RESET);
@@ -161,7 +178,7 @@ public class Consola {
                 break;
 
             case "Cuadrado":
-                System.out.println("Cuadrado");
+                System.out.println(ANSI_YELLOW + "Cuadrado" + ANSI_RESET);
                 Cuadrado cuadrado = ((Cuadrado) figura);
                 for(int i=0;i < cuadrado.getSizeLados();i++) {
                     System.out.println("Lado "+ i +": " + ANSI_GREEN_BACKGROUND + cuadrado.getLado(i) + " cm" + ANSI_RESET);
@@ -202,7 +219,7 @@ public class Consola {
      * Limpia la lista creada (esta almacena las figuras creadas)
      */
     public void limpiarFiguras() {
-        this.figuras = new ArrayList<FiguraGeometrica>();
+        this.figuras = new ArrayList<IFiguraGeometrica>();
     }
 
     /**
