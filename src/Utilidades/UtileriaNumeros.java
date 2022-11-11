@@ -35,7 +35,7 @@ public class UtileriaNumeros {
      */
     public static BigDecimal devolverNumRandom(int min, int max, int precision) {
         Random random = new Random();
-        double num = random.nextDouble(); //(min, max)
+        double num = (random.nextDouble()*(max-min))+min; //(min, max)
         return new BigDecimal(Double.toString(num)).setScale(precision, RoundingMode.HALF_UP);
     }
 }

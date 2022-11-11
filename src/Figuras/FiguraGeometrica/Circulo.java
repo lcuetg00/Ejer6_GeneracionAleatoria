@@ -67,25 +67,54 @@ public class Circulo implements FiguraGeometrica{
         return this.radio.multiply(this.radio).multiply(piCirculo).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
+
+    /**
+     * Devuelve las características de un circulo en un string, con saltos de línea tras cada característica.
+     * Radio, diámetro, perímetro y área.
+     * @return string con los datos
+     */
     @Override
     public String devolverMetadatos() {
-        return null;
+        StringBuilder caracteristicas = new StringBuilder();
+        caracteristicas.append("Círculo" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Radio: " + this.radio + " cm" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Diámetro: " + this.diametro + " cm" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
+
+        return caracteristicas.toString();
+
     }
 
     /**
-     * Devuelve un String con todas las características geométricas de un círculos.
+     * Devuelve la variable radio del círculo
+     * @return
+     */
+    public BigDecimal getRadio() {
+        return radio;
+    }
+
+    /**
+     * Devuelve la variable diámetro del círculo
+     * @return
+     */
+    public BigDecimal getDiametro() {
+        return diametro;
+    }
+
+    /**
+     * Devuelve un String con todas las características del círculo en una sola línea
      * Radio, diámetro, perímetro y área
      * @return
      */
     @Override
     public String toString() {
         StringBuilder caracteristicas = new StringBuilder();
-        caracteristicas.append("Círculo" + Consola.RETORNO_CARRO);
-        caracteristicas.append("Radio: " + this.radio + " cm" + Consola.RETORNO_CARRO);
-        caracteristicas.append("Diámetro: " + this.diametro + " cm" + Consola.RETORNO_CARRO);
-        caracteristicas.append("Perimetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
-        caracteristicas.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
-
+        caracteristicas.append("Círculo ");
+        caracteristicas.append("Radio: " + this.radio + " ");
+        caracteristicas.append("Diámetro: " + this.diametro + " ");
+        caracteristicas.append("Perimetro: " + this.calcularPerimetro() + " ");
+        caracteristicas.append("Área: " + this.calcularArea() + " ");
         return caracteristicas.toString();
     }
 }

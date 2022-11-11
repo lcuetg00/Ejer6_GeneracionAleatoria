@@ -1,8 +1,10 @@
 package Figuras.FiguraGeometrica;
 
+import Consola.Consola;
 import Utilidades.UtileriaNumeros;
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.math.MathContext;
 
@@ -28,28 +30,20 @@ public class Triangulo implements FiguraGeometrica{
      * @param max
      * @param precision
      */
-    public Triangulo(int min, int max, int precision) {
+    public Triangulo(final int min, final int max, final int precision) {
         lados = new ArrayList<BigDecimal>();
-        for(int i=0;i<NUM_LADOS_TRIANGULO;i++) {
-            this.lados.add(UtileriaNumeros.devolverNumRandom(min, max, precision));
-        }
-    }
-/*
-    /**
-     * Constructor para crear una instancia Triangulo con una lista de lados
-     * La lista debe de contener 3 lados
-     * @param listaLados lista con todos los lados del triángulo
-     * @param altura altura del triángulo en cuanto a la base argumentada
-     * @param base medida de la base del triángulo
-     * @throws IllegalArgumentException Si la lista contene menos de 3 lados o más de 3 lados
-     */
-    public Triangulo(ArrayList<BigDecimal> listaLados, BigDecimal altura, BigDecimal base) throws NullPointerException, IllegalArgumentException{
-        if((listaLados == null) || (altura == null) || (base == null) || (listaLados.size() != NUM_LADOS_TRIANGULO)) {
-            throw new IllegalArgumentException("Error en la creación de una instancia de la clase Triangulo, uno de sus parámetros es null o la lista de lados no contiene 3 lados");
-        }
-
-        //this.lados = listaLados;
-        //this.altura=altura;
+        //Comprobar inecualidad de un triangulo
+        BigDecimal lado1 = UtileriaNumeros.devolverNumRandom(min, max, precision);
+        this.lados.add(lado1);
+        BigDecimal lado2 = UtileriaNumeros.devolverNumRandom(min, max, precision);
+        this.lados.add(lado2);
+        //Para que este triangulo exista, tiene que cumplir las Desigualdades de triángulo (Triangle Inequality)
+        //La suma de dos de sus lados, tienen que ser igual o mayor a su último lado
+        //lado1 + lado2 >= lado3
+        //Si lado1 + lado2 = lado3, su area seria 0
+        //lado 3 debe de cumplir: lado1 + lado3 >= lado 2 && lado2 + lado3 >= lado1
+        //BigDecimal lado3 = UtileriaNumeros.devolverNumRandom(0,30,2);
+        //this.lados.add(lado3);
     }
 
     /**
@@ -82,40 +76,85 @@ public class Triangulo implements FiguraGeometrica{
         for(BigDecimal lado : this.lados) {
             area = area.multiply((semiperimetro.subtract(lado)));
         }
-        //area = area.pow(-2);
-        return area;
+        //Ya tenemos area = (S * (S - lado1) (S - lado2) (S - lado3))
+        //Ahora realizamos su raiz cuadrada
+
+        Double raiz = Math.sqrt(area.doubleValue());
+        /*
+        boolean terminado = false;
+        BigDecimal raiz = BigDecimal.ZERO;
+        BigDecimal redondeoRaizCuadrada = new BigDecimal("0.0000000001");
+        BigDecimal x = area;
+        while(terminado == false) {
+            raiz = new BigDecimal("0.5").multiply(x.add(area.divide(x)));
+
+            if(raiz.abs().subtract(x.abs()).compareTo(redondeoRaizCuadrada) == 1) {
+                terminado = true;
+            } else {
+                x = raiz;
+            }
+        }
+        */
+        BigDecimal resultado = new BigDecimal(raiz.toString());
+        resultado = resultado.setScale(UtileriaNumeros.PRECISION_DECIMALES, BigDecimal.ROUND_HALF_UP);
+        return resultado;
     }
 
     @Override
     public String devolverMetadatos() {
-        return null;
+        StringBuilder metadatos = new StringBuilder();
+        if((lados == null)) {
+            throw new NullPointerException("Clase Triandulo toString: la lista de lados es numm");
+        }
+        metadatos.append("Triángulo" + Consola.RETORNO_CARRO);
+        metadatos.append("Lados:" + Consola.RETORNO_CARRO);
+
+        for(int i=0;i<this.lados.size();i++) {
+            metadatos.append("Lado "+ i +":" + lados.get(i).toString() + "cm" + Consola.RETORNO_CARRO);
+        }
+        metadatos.append("Perimetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
+        metadatos.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
+
+        return metadatos.toString();
     }
 
     /**
-     * Devuelve todas las características del Triángulo:
-     * Lado base y altura
-     * Lista de lados
-     * Perímetro y área
+     * Devuelve un String con todas las características geométricas de un triángulo en una línea.
+     * Lados, perímetro y área
      * @return
      */
     @Override
     public String toString() {
         StringBuilder caracteristicas = new StringBuilder();
-        if((lados == null) || (base == null) || (altura == null)) {
-            throw new NullPointerException("Clase Triandulo toString: al menos un parámetro es igual a null");
-        }
-        caracteristicas.append("Triángulo\n");
-        caracteristicas.append("Lados:\n");
-        caracteristicas.append("Su lado base: " + base.toString() + "cm\n");
-        caracteristicas.append("La altura de la base: " + altura.toString() + " cm\n");
-
+        caracteristicas.append("Triangulo ");
         for(int i=0;i<this.lados.size();i++) {
-            caracteristicas.append("Lado "+ i +":" + lados.get(i).toString() + "cm\n");
-
+            caracteristicas.append("Lado "+ i +": " + lados.get(i).toString() + " ");
         }
-        caracteristicas.append("Perimetro: " + this.calcularPerimetro() + " cm\n");
-        caracteristicas.append("Área: " + this.calcularArea() + " cm\n");
+        caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " ");
+        caracteristicas.append("Área: " + this.calcularArea());
 
         return caracteristicas.toString();
     }
+
+    /**
+     * Devuelve el lado de la lista en la posición de index
+     * @param index
+     * @return
+     * @throws InvalidParameterException si el index se sale del tamaño de la lista
+     */
+    public BigDecimal getLado(final int index) throws InvalidParameterException{
+        if(index < 0 || index>lados.size()) {
+            throw new InvalidParameterException("Clase Triangulo: getLado(int index) su index es menor que 0 o se sale de la longitud de la lista");
+        }
+        return lados.get(index);
+    }
+
+    /**
+     * Devuelve el tamaño de la lista 'lados'
+     * @return
+     */
+    public int getSizeLados() {
+        return lados.size();
+    }
+
 }

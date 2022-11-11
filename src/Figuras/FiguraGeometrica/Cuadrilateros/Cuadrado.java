@@ -51,32 +51,18 @@ public class Cuadrado extends Cuadrilateros {
      */
     @Override
     public BigDecimal calcularArea() {
-        if(lados == null) {
-            //tirar excepcion
-        }
         BigDecimal ladoCuadrado = lados.get(0);
-        if(ladoCuadrado == null) {
-            //tirar excepcion
-        }
         return ladoCuadrado.multiply(ladoCuadrado).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
-    @Override
-    public String devolverMetadatos() {
-        return null;
-    }
-
     /**
-     * Devuelve un String con todas las características geométricas de un cuadrado.
+     * Devuelve un String con todas las características geométricas de un cuadrado en una línea.
      * Lados, perímetro y área
      * @return
      */
     @Override
     public String toString() {
         StringBuilder caracteristicas = new StringBuilder();
-        if(lados == null) {
-            //throw new NullPointerException("Clase cuadrado toString: la lista de lados está vacía");
-        }
         caracteristicas.append("Cuadrado ");
         for(int i=0;i<this.lados.size();i++) {
             caracteristicas.append("Lado "+ i +": " + lados.get(i).toString() + " ");
@@ -93,7 +79,7 @@ public class Cuadrado extends Cuadrilateros {
      * @return
      * @throws InvalidParameterException si el index se sale del tamaño de la lista
      */
-    public BigDecimal getLado(int index) throws InvalidParameterException{
+    public BigDecimal getLado(final int index) throws InvalidParameterException{
         if(index < 0 || index>lados.size()) {
             throw new InvalidParameterException("Clase Cuadrado: getLado(int index) su index es menor que 0 o se sale de la longitud de la lista");
         }

@@ -94,8 +94,10 @@ public class Consola {
                         this.clearConsola();
                         this.crearCirculos(numCirculos);
                         this.crearCuadrados(numCuadrados);
-                        this.crearTriangulos(numTriangulos);
-                        System.out.println(this.devolverCaracteristicasFiguras());
+                        //this.crearTriangulos(numTriangulos);
+                        for(FiguraGeometrica figura : this.figuras) {
+                            this.imprimirCaracteristicasFiguras(figura);
+                        }
                         this.imprimirMenu();
 
                         break;
@@ -137,22 +139,38 @@ public class Consola {
 
     }
 
-    /**
-     * Devuelve un String con todas las carácteristicas de cada FiguraGeometrica
-     * @return String con las características de todas las figuras geométricas creadas
-     */
-    public  String devolverCaracteristicasFiguras()
-    {
-        StringBuilder textoFinal = new StringBuilder();
+    public void imprimirCaracteristicasFiguras(final FiguraGeometrica figura) {
+        switch(figura.getClass().getSimpleName()) {
+            case "Circulo":
+                System.out.println("Circulo");
+                Circulo circulo = ((Circulo) figura);
+                System.out.println("Radio: " + ANSI_GREEN_BACKGROUND + circulo.getRadio() + " cm" + ANSI_RESET);
+                System.out.println("Diámetro: " + ANSI_GREEN_BACKGROUND + circulo.getDiametro() + " cm" + ANSI_RESET);
+                System.out.println("Perímetro: " + ANSI_GREEN_BACKGROUND + circulo.calcularPerimetro() + " cm" + ANSI_RESET);
+                System.out.println("Área: " + ANSI_GREEN_BACKGROUND + circulo.calcularArea() + " cm" + ANSI_RESET);
+                break;
 
-        for(int i=0;i<this.figuras.size();i++) {
-            textoFinal.append("_____________\n");
-            textoFinal.append(figuras.get(i));
+            case "Triangulo":
+                System.out.println("Triángulo");
+                Triangulo triangulo = ((Triangulo) figura);
+                for(int i=0;i < triangulo.getSizeLados();i++) {
+                    System.out.println("Lado "+ i +": " + ANSI_GREEN_BACKGROUND + triangulo.getLado(i) + "cm" + ANSI_RESET);
+                }
+                System.out.println("Perímetro: " + ANSI_GREEN_BACKGROUND + triangulo.calcularPerimetro() + " cm" + ANSI_RESET);
+                System.out.println("Área: " + ANSI_GREEN_BACKGROUND + triangulo.calcularArea() + " cm" + ANSI_RESET);
+                break;
+
+            case "Cuadrado":
+                System.out.println("Cuadrado");
+                Cuadrado cuadrado = ((Cuadrado) figura);
+                for(int i=0;i < cuadrado.getSizeLados();i++) {
+                    System.out.println("Lado "+ i +": " + ANSI_GREEN_BACKGROUND + cuadrado.getLado(i) + " cm" + ANSI_RESET);
+                }
+                System.out.println("Perímetro: " + ANSI_GREEN_BACKGROUND +cuadrado.calcularPerimetro() + " cm" + ANSI_RESET);
+                System.out.println("Área: " + ANSI_GREEN_BACKGROUND + cuadrado.calcularArea() + " cm" + ANSI_RESET);
+                break;
         }
-        textoFinal.append("_____________\n");
 
-
-        return textoFinal.toString();
     }
 
     /**
@@ -164,7 +182,7 @@ public class Consola {
 
             if(os.contains("Windows")) {
                 //Para sistemas de Windows
-                //Para windos, ejecutamos el interpretador de lineas 'cmd'
+                //Para windows, ejecutamos el interpretador de lineas 'cmd'
                 //Luego le decimos que ejecute el comando '/c cls'
                 //Conectamos el output de ese comando con inheritIO() para limpiar la consola en Windows
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();

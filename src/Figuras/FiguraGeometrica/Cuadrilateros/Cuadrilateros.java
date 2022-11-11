@@ -1,4 +1,5 @@
 package Figuras.FiguraGeometrica.Cuadrilateros;
+import Consola.Consola;
 import Figuras.FiguraGeometrica.FiguraGeometrica;
 
 import java.math.BigDecimal;
@@ -33,6 +34,24 @@ import java.util.List;
         }
         return perimetro;
     }
+
+    /**
+     * Devuelve las características del cuadrilátero en un String, con saltos de línea tras cada característica.
+     * @return
+     */
+    @Override
+    public String devolverMetadatos() {
+        StringBuilder caracteristicas = new StringBuilder();
+        caracteristicas.append("Cuadrado" + Consola.RETORNO_CARRO);
+        for(int i=0;i<this.lados.size();i++) {
+            caracteristicas.append("Lado "+ i +": " + lados.get(i).toString() + " cm" + Consola.RETORNO_CARRO);
+        }
+        caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
+        caracteristicas.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
+
+        return caracteristicas.toString();
+    }
+
 
 
 
