@@ -1,7 +1,6 @@
-import Consola.Consola;
-import Figuras.FiguraGeometrica.Triangulo;
 
-import java.math.BigDecimal;
+import com.ejer.consola.Consola;
+
 
 public class Main {
 
