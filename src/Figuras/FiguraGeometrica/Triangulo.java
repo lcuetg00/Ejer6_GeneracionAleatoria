@@ -53,6 +53,9 @@ public class Triangulo implements IFiguraGeometrica {
      */
     @Override
     public BigDecimal calcularPerimetro() {
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
+        }
         BigDecimal perimetro = new BigDecimal(0);
         for(int i=0;i<lados.size();i++) {
             perimetro = perimetro.add(lados.get(i));
@@ -69,6 +72,9 @@ public class Triangulo implements IFiguraGeometrica {
      */
     @Override
     public BigDecimal calcularArea() {
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
+        }
         //El semiperimetro es la mitad del perímetro del triángulo
         BigDecimal semiperimetro = this.calcularPerimetro().divide(new BigDecimal("2"));
         BigDecimal area;
@@ -78,23 +84,7 @@ public class Triangulo implements IFiguraGeometrica {
         }
         //Ya tenemos area = (S * (S - lado1) (S - lado2) (S - lado3))
         //Ahora realizamos su raiz cuadrada
-
         Double raiz = Math.sqrt(area.doubleValue());
-        /*
-        boolean terminado = false;
-        BigDecimal raiz = BigDecimal.ZERO;
-        BigDecimal redondeoRaizCuadrada = new BigDecimal("0.0000000001");
-        BigDecimal x = area;
-        while(terminado == false) {
-            raiz = new BigDecimal("0.5").multiply(x.add(area.divide(x)));
-
-            if(raiz.abs().subtract(x.abs()).compareTo(redondeoRaizCuadrada) == 1) {
-                terminado = true;
-            } else {
-                x = raiz;
-            }
-        }
-        */
         BigDecimal resultado = new BigDecimal(raiz.toString());
         resultado = resultado.setScale(UtileriaNumeros.PRECISION_DECIMALES, BigDecimal.ROUND_HALF_UP);
         return resultado;
@@ -103,8 +93,8 @@ public class Triangulo implements IFiguraGeometrica {
     @Override
     public String devolverMetadatos() {
         StringBuilder metadatos = new StringBuilder();
-        if((lados == null)) {
-            throw new NullPointerException("Clase Triandulo toString: la lista de lados es null");
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
         }
         metadatos.append("Triángulo" + Consola.RETORNO_CARRO);
         metadatos.append("Lados:" + Consola.RETORNO_CARRO);
@@ -125,6 +115,9 @@ public class Triangulo implements IFiguraGeometrica {
      */
     @Override
     public String toString() {
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
+        }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Triangulo ");
         for(int i=0;i<this.lados.size();i++) {
@@ -143,6 +136,9 @@ public class Triangulo implements IFiguraGeometrica {
      * @throws InvalidParameterException si el index se sale del tamaño de la lista
      */
     public BigDecimal getLado(final int index) throws InvalidParameterException{
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
+        }
         if(index < 0 || index>lados.size()) {
             throw new InvalidParameterException("Clase Triangulo: getLado(int index) su index es menor que 0 o se sale de la longitud de la lista");
         }
@@ -154,6 +150,9 @@ public class Triangulo implements IFiguraGeometrica {
      * @return
      */
     public int getSizeLados() {
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
+        }
         return lados.size();
     }
 

@@ -27,6 +27,9 @@ import java.util.List;
      */
     @Override
     public BigDecimal calcularPerimetro() {
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia Cuadrilátero: su lista de lados es null");
+        }
         BigDecimal perimetro = BigDecimal.ZERO;
         for(int i=0;i<lados.size();i++) {
             perimetro = perimetro.add(lados.get(i));
@@ -40,6 +43,9 @@ import java.util.List;
      */
     @Override
     public String devolverMetadatos() {
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia Cuadrilátero: su lista de lados es null");
+        }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Cuadrado" + Consola.RETORNO_CARRO);
         for(int i=0;i<this.lados.size();i++) {

@@ -65,7 +65,7 @@ public class Consola {
 
 
     //Lista que almacenará lass figuras que se creen
-    private ArrayList<IFiguraGeometrica> figuras;
+    private final ArrayList<IFiguraGeometrica> figuras;
 
 
     /**
@@ -115,9 +115,9 @@ public class Consola {
                         for(int i=0;i<numCuadrados;i++) {
                             this.insertarFiguraLista(new Cuadrado(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.NUMALEATORIO_MIN));
                         }
-                        //for(int i=0;i<numTriangulos;i++) {
-                        //    this.insertarFiguraLista(new Triangulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.NUMALEATORIO_MIN));
-                        //}
+                        for(int i=0;i<numTriangulos;i++) {
+                            this.insertarFiguraLista(new Triangulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.NUMALEATORIO_MIN));
+                        }
                         for(IFiguraGeometrica figura : this.figuras) {
                             System.out.println("________________");
                             this.imprimirCaracteristicasFiguras(figura);
@@ -147,7 +147,7 @@ public class Consola {
                 System.out.println(ANSI_YELLOW_BACKGROUND + "Opción tecleada incorrecta. Seleccione una de las opciones disponibles" + ANSI_RESET);
 
 
-            } catch (Exception e){
+            } catch (NullPointerException e){
                 System.out.println(e.toString());
             }
         }
@@ -206,7 +206,7 @@ public class Consola {
      * Limpia la lista creada (esta almacena las figuras creadas)
      */
     public void limpiarFiguras() {
-        this.figuras = new ArrayList<IFiguraGeometrica>();
+        this.figuras.clear();
     }
 
     /**

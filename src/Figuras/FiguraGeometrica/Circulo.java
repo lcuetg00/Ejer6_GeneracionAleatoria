@@ -53,7 +53,10 @@ public class Circulo implements IFiguraGeometrica {
      */
     @Override
     public BigDecimal calcularPerimetro() {
-        return this.radio.multiply(BigDecimal.valueOf(Math.PI)).multiply(new BigDecimal(2)).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
+        if(this.radio == null) {
+            throw new NullPointerException("Instancia de clase Círculo: su variable 'radio' es null");
+        }
+        return this.radio.multiply(piCirculo).multiply(new BigDecimal("2")).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
     /**
@@ -63,6 +66,9 @@ public class Circulo implements IFiguraGeometrica {
      */
     @Override
     public BigDecimal calcularArea() {
+        if(this.radio == null) {
+            throw new NullPointerException("Instancia de clase Círculo: su variable 'radio' es null");
+        }
         return this.radio.multiply(this.radio).multiply(piCirculo).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
@@ -74,6 +80,9 @@ public class Circulo implements IFiguraGeometrica {
      */
     @Override
     public String devolverMetadatos() {
+        if(this.radio == null || this.diametro == null) {
+            throw new NullPointerException("Instancia de clase Círculo: alguna de sus variables es null");
+        }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Círculo" + Consola.RETORNO_CARRO);
         caracteristicas.append("Radio: " + this.radio + " cm" + Consola.RETORNO_CARRO);
@@ -108,6 +117,9 @@ public class Circulo implements IFiguraGeometrica {
      */
     @Override
     public String toString() {
+        if(this.radio == null || this.diametro == null) {
+            throw new NullPointerException("Instancia de clase Círculo: alguna de sus variables es null");
+        }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Círculo ");
         caracteristicas.append("Radio: " + this.radio + " ");

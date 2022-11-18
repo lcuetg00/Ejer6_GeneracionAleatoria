@@ -43,6 +43,9 @@ public class Cuadrado extends Cuadrilateros {
         if(lado == null) {
             throw new InvalidParameterException("Clase Cuadrado: el parámetro lado en su constructor es null");
         }
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
+        }
         for(int i=0;i<NUM_LADOS_CUADRILATERO;i++) {
             this.lados.add(lado);
         }
@@ -55,6 +58,9 @@ public class Cuadrado extends Cuadrilateros {
      */
     @Override
     public BigDecimal calcularArea() {
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
+        }
         BigDecimal ladoCuadrado = lados.get(0);
         return ladoCuadrado.multiply(ladoCuadrado).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
@@ -66,6 +72,9 @@ public class Cuadrado extends Cuadrilateros {
      */
     @Override
     public String toString() {
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
+        }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Cuadrado ");
         for(int i=0;i<this.lados.size();i++) {
@@ -84,6 +93,9 @@ public class Cuadrado extends Cuadrilateros {
      * @throws InvalidParameterException si el index se sale del tamaño de la lista
      */
     public BigDecimal getLado(final int index) throws InvalidParameterException{
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
+        }
         if(index < 0 || index>lados.size()) {
             throw new InvalidParameterException("Clase Cuadrado: getLado(int index) su index es menor que 0 o se sale de la longitud de la lista");
         }
@@ -95,6 +107,9 @@ public class Cuadrado extends Cuadrilateros {
      * @return
      */
     public int getSizeLados() {
+        if(this.lados == null) {
+            throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
+        }
         return lados.size();
     }
 }
