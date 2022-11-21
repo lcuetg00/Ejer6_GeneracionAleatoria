@@ -32,7 +32,11 @@ import java.util.List;
         }
         BigDecimal perimetro = BigDecimal.ZERO;
         for(int i=0;i<lados.size();i++) {
-            perimetro = perimetro.add(lados.get(i));
+            BigDecimal ladoCuadrado = lados.get(i);
+            if(ladoCuadrado == null) {
+                throw new NullPointerException("Instancia Cuadrilátero: su lista de lados contiene null");
+            }
+            perimetro = perimetro.add(ladoCuadrado);
         }
         return perimetro;
     }
@@ -49,15 +53,16 @@ import java.util.List;
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Cuadrado" + Consola.RETORNO_CARRO);
         for(int i=0;i<this.lados.size();i++) {
-            caracteristicas.append("Lado "+ i +": " + lados.get(i).toString() + " cm" + Consola.RETORNO_CARRO);
+            BigDecimal ladoCuadrado = lados.get(i);
+            if(ladoCuadrado == null) {
+                throw new NullPointerException("Instancia Cuadrilátero: su lista de lados contiene null");
+            }
+            caracteristicas.append("Lado "+ i +": " + ladoCuadrado + " cm" + Consola.RETORNO_CARRO);
         }
         caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
         caracteristicas.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
 
         return caracteristicas.toString();
     }
-
-
-
 
 }

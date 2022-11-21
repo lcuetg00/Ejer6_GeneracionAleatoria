@@ -58,6 +58,9 @@ public class Cuadrado extends Cuadrilatero {
             throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
         }
         BigDecimal ladoCuadrado = lados.get(0);
+        if(ladoCuadrado == null) {
+            throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados contiene null");
+        }
         return ladoCuadrado.multiply(ladoCuadrado).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
@@ -74,7 +77,7 @@ public class Cuadrado extends Cuadrilatero {
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Cuadrado ");
         for(int i=0;i<this.lados.size();i++) {
-            caracteristicas.append("Lado "+ i +": " + lados.get(i).toString() + " ");
+            caracteristicas.append("Lado "+ i +": " + ((lados.get(i)) != null ? lados.get(i).toString() : "Null") + " ");
         }
         caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " ");
         caracteristicas.append("Área: " + this.calcularArea());

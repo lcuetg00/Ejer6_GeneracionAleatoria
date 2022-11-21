@@ -59,7 +59,11 @@ public class Triangulo implements IFiguraGeometrica {
         }
         BigDecimal perimetro = new BigDecimal(0);
         for(int i=0;i<lados.size();i++) {
-            perimetro = perimetro.add(lados.get(i));
+            BigDecimal ladoTriangulo = lados.get(i);
+            if(ladoTriangulo == null) {
+                throw new NullPointerException("Instancia de clase Triángulo: su lista de lados contiene null");
+            }
+            perimetro = perimetro.add(ladoTriangulo);
         }
         return perimetro;
     }
@@ -101,7 +105,11 @@ public class Triangulo implements IFiguraGeometrica {
         metadatos.append("Lados:" + Consola.RETORNO_CARRO);
 
         for(int i=0;i<this.lados.size();i++) {
-            metadatos.append("Lado "+ i +":" + lados.get(i).toString() + "cm" + Consola.RETORNO_CARRO);
+            BigDecimal ladoTriangulo = lados.get(i);
+            if(ladoTriangulo == null) {
+                throw new NullPointerException("Instancia de clase Triángulo: su lista de lados contiene null");
+            }
+            metadatos.append("Lado "+ i +":" + ladoTriangulo + "cm" + Consola.RETORNO_CARRO);
         }
         metadatos.append("Perimetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
         metadatos.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
@@ -122,7 +130,7 @@ public class Triangulo implements IFiguraGeometrica {
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Triangulo ");
         for(int i=0;i<this.lados.size();i++) {
-            caracteristicas.append("Lado "+ i +": " + lados.get(i).toString() + " ");
+            caracteristicas.append("Lado "+ i +": " + ((lados.get(i)) != null ? lados.get(i).toString() : "Null") + " ");
         }
         caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " ");
         caracteristicas.append("Área: " + this.calcularArea());

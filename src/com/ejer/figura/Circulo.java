@@ -84,7 +84,13 @@ public class Circulo implements IFiguraGeometrica {
         }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Círculo" + Consola.RETORNO_CARRO);
+        if(this.radio == null) {
+            throw new NullPointerException("Instancia de clase Círculo: su radio es null");
+        }
         caracteristicas.append("Radio: " + this.radio + " cm" + Consola.RETORNO_CARRO);
+        if(this.diametro == null) {
+            throw new NullPointerException("Instancia de clase Círculo: su diametro es null");
+        }
         caracteristicas.append("Diámetro: " + this.diametro + " cm" + Consola.RETORNO_CARRO);
         caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
         caracteristicas.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);
@@ -121,8 +127,8 @@ public class Circulo implements IFiguraGeometrica {
         }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Círculo ");
-        caracteristicas.append("Radio: " + this.radio + " ");
-        caracteristicas.append("Diámetro: " + this.diametro + " ");
+        caracteristicas.append("Radio: " + ((this.radio) != null ? this.radio : "Null") + " ");
+        caracteristicas.append("Diámetro: " + ((this.diametro) != null ? this.diametro : "Null") + " ");
         caracteristicas.append("Perimetro: " + this.calcularPerimetro() + " ");
         caracteristicas.append("Área: " + this.calcularArea() + " ");
         return caracteristicas.toString();
