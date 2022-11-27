@@ -19,11 +19,11 @@ public class Consola {
     /**
      * Representa la opción de crear figuras en el menú
      */
-    public static final int OPCIONCREAR = 1;
+    private static final int OPCIONCREAR = 1;
     /**
      * Representa la opción de salir en el menú
      */
-    public static final int OPCIONSALIR = 2;
+    private static final int OPCIONSALIR = 2;
 
     //Formato de texto
     /**
@@ -62,15 +62,17 @@ public class Consola {
     public static final String RETORNO_CARRO = System.getProperty("line.separator");
 
 
-    //Lista que almacenará lass figuras que se creen
-    private final ArrayList<IFiguraGeometrica> figuras;
+    /**
+     * Lista que almacenará las figuras creadas
+     */
+    private final ArrayList<IFiguraGeometrica> listaFiguras;
 
 
     /**
      * Contructor que crea la lista en la cual se almacenarán las figuras que se crearán.
      */
     public Consola() {
-        figuras = new ArrayList<IFiguraGeometrica>();
+        listaFiguras = new ArrayList<IFiguraGeometrica>();
     }
 
     /**
@@ -108,15 +110,15 @@ public class Consola {
 
                         //Creación de las instancias e insertado en la lista 'figuras'
                         for(int i=0;i<numCirculos;i++) {
-                            this.insertarFiguraLista(new Circulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.NUMALEATORIO_MIN));
+                            this.insertarFiguraLista(new Circulo());
                         }
                         for(int i=0;i<numCuadrados;i++) {
-                            this.insertarFiguraLista(new Cuadrado(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.NUMALEATORIO_MIN));
+                            this.insertarFiguraLista(new Cuadrado());
                         }
                         for(int i=0;i<numTriangulos;i++) {
-                            this.insertarFiguraLista(new Triangulo(UtileriaNumeros.NUMALEATORIO_MIN, UtileriaNumeros.NUMALEATORIO_MAX, UtileriaNumeros.NUMALEATORIO_MIN));
+                            this.insertarFiguraLista(new Triangulo());
                         }
-                        for(IFiguraGeometrica figura : this.figuras) {
+                        for(IFiguraGeometrica figura : this.listaFiguras) {
                             System.out.println("________________");
                             this.imprimirCaracteristicasFiguras(figura);
                         }
@@ -204,7 +206,7 @@ public class Consola {
      * Limpia la lista creada (esta almacena las figuras creadas)
      */
     public void limpiarFiguras() {
-        this.figuras.clear();
+        this.listaFiguras.clear();
     }
 
     /**
@@ -216,7 +218,7 @@ public class Consola {
         if(figura == null) {
             throw new InvalidParameterException("Clase Consola: insertarFiguraLista: la figura introducida es null");
         }
-        this.figuras.add(figura);
+        this.listaFiguras.add(figura);
     }
 
     /**

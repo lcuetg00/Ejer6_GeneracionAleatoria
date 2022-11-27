@@ -18,23 +18,20 @@ public class Triangulo implements IFiguraGeometrica {
     /**
      * Lista que contendrá los 3 lados de un triángulo
      */
-    private ArrayList<BigDecimal> lados;
+    private ArrayList<BigDecimal> listLados;
 
     /**
      * Constructor de Triangulo para construirlo con valores aleatorios (con el minimo y el maximo pasado por parámetro).
-     * Los valores aleatorios estarán aproximandos a los decimales indicados en el parámetro "precision".
-     * En la lista 'lados', el primer lado será su base.
-     * @param min
-     * @param max
-     * @param precision
+     * Utiliza {@link UtileriaNumeros#generateDefaultNumerosDecimalesAleatorios()} para los dos primeros lados
+     * Utiliza {@link UtileriaNumeros#generateNumerosDecimalesAleatorios(int, int)} para el tercer lado
      */
-    public Triangulo(final int min, final int max, final int precision) {
-        lados = new ArrayList<BigDecimal>();
+    public Triangulo() {
+        listLados = new ArrayList<BigDecimal>();
         //Comprobar inecualidad de un triangulo
-        BigDecimal lado1 = UtileriaNumeros.devolverNumRandom(min, max, precision);
-        this.lados.add(lado1);
-        BigDecimal lado2 = UtileriaNumeros.devolverNumRandom(min, max, precision);
-        this.lados.add(lado2);
+        BigDecimal lado1 = UtileriaNumeros.generateDefaultNumerosDecimalesAleatorios();
+        this.listLados.add(lado1);
+        BigDecimal lado2 = UtileriaNumeros.generateDefaultNumerosDecimalesAleatorios();
+        this.listLados.add(lado2);
 
         BigDecimal diferencia = lado1.subtract(lado2).abs();
         BigDecimal lado3 = BigDecimal.ZERO;
@@ -42,9 +39,9 @@ public class Triangulo implements IFiguraGeometrica {
         //La suma de cualquiera de sus lados, tienen que ser igual o mayor a su último lado
         //(lado3 < diferencia) || lado3 > lado1.add(lado2)
         while((diferencia.compareTo(lado3) == 1) || (lado3.compareTo(lado1.add(lado2)))==1) {
-            lado3 = UtileriaNumeros.devolverNumRandom( lado1.add(lado2).intValue(), diferencia.intValue(), UtileriaNumeros.PRECISION_DECIMALES);
+            lado3 = UtileriaNumeros.generateNumerosDecimalesAleatorios( lado1.add(lado2).intValue(), diferencia.intValue());
         }
-        this.lados.add(lado3);
+        this.listLados.add(lado3);
     }
 
     /**
@@ -54,12 +51,12 @@ public class Triangulo implements IFiguraGeometrica {
      */
     @Override
     public BigDecimal calcularPerimetro() {
-        if(this.lados == null) {
+        if(this.listLados == null) {
             throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
         }
         BigDecimal perimetro = new BigDecimal(0);
-        for(int i=0;i<lados.size();i++) {
-            BigDecimal ladoTriangulo = lados.get(i);
+        for(int i = 0; i< listLados.size(); i++) {
+            BigDecimal ladoTriangulo = listLados.get(i);
             if(ladoTriangulo == null) {
                 throw new NullPointerException("Instancia de clase Triángulo: su lista de lados contiene null");
             }
@@ -73,39 +70,44 @@ public class Triangulo implements IFiguraGeometrica {
      * Utiliza la formula de heron
      * Semiperimetro (S) = (lado1 + lado2 + lado3)/2
      * Área = squareroot(S * (S - lado1) (S - lado2) (S - lado3))
-     * @return area del triángulo
+     * @return área del triángulo
      */
     @Override
     public BigDecimal calcularArea() {
-        if(this.lados == null) {
+        if(this.listLados == null) {
             throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
         }
         //El semiperimetro es la mitad del perímetro del triángulo
         BigDecimal semiperimetro = this.calcularPerimetro().divide(new BigDecimal("2"));
         BigDecimal area;
         area = semiperimetro;
-        for(BigDecimal lado : this.lados) {
+        for(BigDecimal lado : this.listLados) {
             area = area.multiply((semiperimetro.subtract(lado)));
         }
         //Ya tenemos area = (S * (S - lado1) (S - lado2) (S - lado3))
         //Ahora realizamos su raiz cuadrada
         Double raiz = Math.sqrt(area.doubleValue());
         BigDecimal resultado = new BigDecimal(raiz.toString());
-        resultado = resultado.setScale(UtileriaNumeros.PRECISION_DECIMALES, BigDecimal.ROUND_HALF_UP);
+        resultado = resultado.setScale(IFiguraGeometrica.DEFAULT_PRECISION_DECIMALES, BigDecimal.ROUND_HALF_UP);
         return resultado;
     }
 
+    /**
+     * Devuelve las características de un triángulo en un string, con saltos de línea tras cada característica.
+     * Lados, área, perímetro
+     * @return string con los datos
+     */
     @Override
     public String devolverMetadatos() {
         StringBuilder metadatos = new StringBuilder();
-        if(this.lados == null) {
+        if(this.listLados == null) {
             throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
         }
         metadatos.append("Triángulo" + Consola.RETORNO_CARRO);
         metadatos.append("Lados:" + Consola.RETORNO_CARRO);
 
-        for(int i=0;i<this.lados.size();i++) {
-            BigDecimal ladoTriangulo = lados.get(i);
+        for(int i = 0; i<this.listLados.size(); i++) {
+            BigDecimal ladoTriangulo = listLados.get(i);
             if(ladoTriangulo == null) {
                 throw new NullPointerException("Instancia de clase Triángulo: su lista de lados contiene null");
             }
@@ -124,13 +126,13 @@ public class Triangulo implements IFiguraGeometrica {
      */
     @Override
     public String toString() {
-        if(this.lados == null) {
+        if(this.listLados == null) {
             throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
         }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Triangulo ");
-        for(int i=0;i<this.lados.size();i++) {
-            caracteristicas.append("Lado "+ i +": " + ((lados.get(i)) != null ? lados.get(i).toString() : "Null") + " ");
+        for(int i = 0; i<this.listLados.size(); i++) {
+            caracteristicas.append("Lado "+ i +": " + ((listLados.get(i)) != null ? listLados.get(i).toString() : "Null") + " ");
         }
         caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " ");
         caracteristicas.append("Área: " + this.calcularArea());
@@ -145,13 +147,13 @@ public class Triangulo implements IFiguraGeometrica {
      * @throws InvalidParameterException si el index se sale del tamaño de la lista
      */
     public BigDecimal getLado(final int index) throws InvalidParameterException{
-        if(this.lados == null) {
+        if(this.listLados == null) {
             throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
         }
-        if(index < 0 || index>lados.size()) {
+        if(index < 0 || index> listLados.size()) {
             throw new InvalidParameterException("Clase Triangulo: getLado(int index) su index es menor que 0 o se sale de la longitud de la lista");
         }
-        return lados.get(index);
+        return listLados.get(index);
     }
 
     /**
@@ -159,10 +161,10 @@ public class Triangulo implements IFiguraGeometrica {
      * @return
      */
     public int getSizeLados() {
-        if(this.lados == null) {
+        if(this.listLados == null) {
             throw new NullPointerException("Instancia de clase Triángulo: su lista de lados es null");
         }
-        return lados.size();
+        return listLados.size();
     }
 
 }

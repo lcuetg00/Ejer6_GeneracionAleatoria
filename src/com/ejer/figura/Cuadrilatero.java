@@ -14,7 +14,7 @@ import java.util.List;
     /**
      * Lista que contendrá los 4 lados de un cuadrilátero
      */
-    protected List<BigDecimal> lados;
+    protected List<BigDecimal> listaLados;
     /**
      * Representa el número de lados que tiene un cuadrilátero
      */
@@ -22,17 +22,16 @@ import java.util.List;
 
     /**
      * Devuelve el perímetro con la forma de calcularla para los cuadriláteros
-     * Perímetro = suma de todos sus lados
-     * @return
+     * @return Perímetro = suma de todos sus lados
      */
     @Override
     public BigDecimal calcularPerimetro() {
-        if(this.lados == null) {
+        if(this.listaLados == null) {
             throw new NullPointerException("Instancia Cuadrilátero: su lista de lados es null");
         }
         BigDecimal perimetro = BigDecimal.ZERO;
-        for(int i=0;i<lados.size();i++) {
-            BigDecimal ladoCuadrado = lados.get(i);
+        for(int i = 0; i< listaLados.size(); i++) {
+            BigDecimal ladoCuadrado = listaLados.get(i);
             if(ladoCuadrado == null) {
                 throw new NullPointerException("Instancia Cuadrilátero: su lista de lados contiene null");
             }
@@ -43,21 +42,21 @@ import java.util.List;
 
     /**
      * Devuelve las características del cuadrilátero en un String, con saltos de línea tras cada característica.
-     * @return
+     * @return string con características
      */
     @Override
     public String devolverMetadatos() {
-        if(this.lados == null) {
+        if(this.listaLados == null) {
             throw new NullPointerException("Instancia Cuadrilátero: su lista de lados es null");
         }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Cuadrado" + Consola.RETORNO_CARRO);
-        for(int i=0;i<this.lados.size();i++) {
-            BigDecimal ladoCuadrado = lados.get(i);
+        for(int i = 0; i<this.listaLados.size(); i++) {
+            BigDecimal ladoCuadrado = listaLados.get(i);
             if(ladoCuadrado == null) {
                 throw new NullPointerException("Instancia Cuadrilátero: su lista de lados contiene null");
             }
-            caracteristicas.append("Lado "+ i +": " + ladoCuadrado + " cm" + Consola.RETORNO_CARRO);
+            caracteristicas.append("Lado "+ i +": " + ((ladoCuadrado) != null ? ladoCuadrado : "Null") + " cm" + Consola.RETORNO_CARRO);
         }
         caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " cm" + Consola.RETORNO_CARRO);
         caracteristicas.append("Área: " + this.calcularArea() + " cm" + Consola.RETORNO_CARRO);

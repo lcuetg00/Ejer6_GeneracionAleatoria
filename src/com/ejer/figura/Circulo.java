@@ -8,27 +8,31 @@ import com.ejer.utilidades.UtileriaNumeros;
 
 /**
  * Creación y operaciones con círculos
+ * @author Luis Cueto
  */
 public class Circulo implements IFiguraGeometrica {
     /**
      * Valor de PI utilizado para la clase Círculo
+     * Utiliza {@link Math#PI}
      */
     public static final BigDecimal piCirculo = new BigDecimal(Math.PI);
+    /**
+     * Valor que representa el radio del círculo
+     */
     private BigDecimal radio;
+    /**
+     * Valor que representa el diámetro del círculo
+     */
     private BigDecimal diametro;
 
 
     /**
-     * Constructor de Circulo para construirlo con valores aleatorios (con el minimo y el maximo pasado por parámetro.
-     * Los valores aleatorios estarán aproximandos a los decimales indicados en el parámetro "precision"
-     * @param min
-     * @param max
-     * @param precision
+     * Constructor de Circulo para construirlo con valores aleatorios
+     * Utiliza {@link UtileriaNumeros#generateDefaultNumerosDecimalesAleatorios()} para crear un número decimal para su radio
+     * Llama a {@link #Circulo(BigDecimal)}
      */
-    public Circulo(final int min, final int max, final int precision) {
-        this.radio = UtileriaNumeros.devolverNumRandom(min, max, precision);
-        //El diámetro del círculo es el doble que el radio
-        this.diametro = radio.multiply(new BigDecimal("2"));
+    public Circulo() {
+        this(UtileriaNumeros.generateDefaultNumerosDecimalesAleatorios());
     }
 
     /**
@@ -55,7 +59,7 @@ public class Circulo implements IFiguraGeometrica {
         if(this.radio == null) {
             throw new NullPointerException("Instancia de clase Círculo: su variable 'radio' es null");
         }
-        return this.radio.multiply(piCirculo).multiply(new BigDecimal("2")).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
+        return this.radio.multiply(piCirculo).multiply(new BigDecimal("2")).setScale(IFiguraGeometrica.DEFAULT_PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
     /**
@@ -68,7 +72,7 @@ public class Circulo implements IFiguraGeometrica {
         if(this.radio == null) {
             throw new NullPointerException("Instancia de clase Círculo: su variable 'radio' es null");
         }
-        return this.radio.multiply(this.radio).multiply(piCirculo).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
+        return this.radio.multiply(this.radio).multiply(piCirculo).setScale(IFiguraGeometrica.DEFAULT_PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
 

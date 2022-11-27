@@ -6,27 +6,23 @@ import com.ejer.utilidades.UtileriaNumeros;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.InvalidParameterException;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Creación y operaciones con cuadrados
+ * @author Luis Cueto
  */
 
 public class Cuadrado extends Cuadrilatero {
 
     /**
-     * Constructor de Cuadrado para construirlo con valores aleatorios (con el minimo y el maximo pasado por parámetro).
-     * Los valores aleatorios estarán aproximandos a los decimales indicados en el parámetro "precision".
-     * @param min
-     * @param max
-     * @param precision
+     * Constructor de Cuadrado para construirlo con valores aleatorios
+     * Utiliza {@link UtileriaNumeros#generateDefaultNumerosDecimalesAleatorios()} para crear un número para sus lados
+     * Utiliza {@link Cuadrilatero#NUM_LADOS_CUADRILATERO} para su número de lados
+     * Llama a {@link #Cuadrado(BigDecimal)}
      */
-    public Cuadrado(final int min, final int max, final int precision) {
-        lados = new ArrayList<BigDecimal>();
-        BigDecimal lado = UtileriaNumeros.devolverNumRandom(min, max, precision);
-        for(int i = 0; i< Cuadrilatero.NUM_LADOS_CUADRILATERO; i++) {
-            this.lados.add(lado);
-        }
+    public Cuadrado() {
+        this(UtileriaNumeros.generateDefaultNumerosDecimalesAleatorios());
     }
 
     /**
@@ -39,29 +35,28 @@ public class Cuadrado extends Cuadrilatero {
         if(lado == null) {
             throw new InvalidParameterException("Clase Cuadrado: el parámetro lado en su constructor es null");
         }
-        if(this.lados == null) {
-            throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
-        }
+        this.listaLados = new ArrayList<BigDecimal>();
         for(int i=0;i<NUM_LADOS_CUADRILATERO;i++) {
-            this.lados.add(lado);
+            this.listaLados.add(lado);
         }
     }
 
     /**
      * Devuelve el área con la forma de calcularla del cuadrado
      * Area = lado * lado
-     * @return area del cuadrado
+     * Redondea el área con {@link #DEFAULT_PRECISION_DECIMALES}
+     * @return área del cuadrado
      */
     @Override
     public BigDecimal calcularArea() {
-        if(this.lados == null) {
+        if(this.listaLados == null) {
             throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
         }
-        BigDecimal ladoCuadrado = lados.get(0);
+        BigDecimal ladoCuadrado = listaLados.get(0);
         if(ladoCuadrado == null) {
             throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados contiene null");
         }
-        return ladoCuadrado.multiply(ladoCuadrado).setScale(UtileriaNumeros.PRECISION_DECIMALES, RoundingMode.HALF_UP);
+        return ladoCuadrado.multiply(ladoCuadrado).setScale(this.DEFAULT_PRECISION_DECIMALES, RoundingMode.HALF_UP);
     }
 
     /**
@@ -71,13 +66,13 @@ public class Cuadrado extends Cuadrilatero {
      */
     @Override
     public String toString() {
-        if(this.lados == null) {
+        if(this.listaLados == null) {
             throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
         }
         StringBuilder caracteristicas = new StringBuilder();
         caracteristicas.append("Cuadrado ");
-        for(int i=0;i<this.lados.size();i++) {
-            caracteristicas.append("Lado "+ i +": " + ((lados.get(i)) != null ? lados.get(i).toString() : "Null") + " ");
+        for(int i = 0; i<this.listaLados.size(); i++) {
+            caracteristicas.append("Lado "+ i +": " + ((listaLados.get(i)) != null ? listaLados.get(i).toString() : "Null") + " ");
         }
         caracteristicas.append("Perímetro: " + this.calcularPerimetro() + " ");
         caracteristicas.append("Área: " + this.calcularArea());
@@ -92,23 +87,23 @@ public class Cuadrado extends Cuadrilatero {
      * @throws InvalidParameterException si el index se sale del tamaño de la lista
      */
     public BigDecimal getLado(final int index) throws InvalidParameterException{
-        if(this.lados == null) {
+        if(this.listaLados == null) {
             throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
         }
-        if(index < 0 || index>lados.size()) {
+        if(index < 0 || index> listaLados.size()) {
             throw new InvalidParameterException("Clase Cuadrado: getLado(int index) su index es menor que 0 o se sale de la longitud de la lista");
         }
-        return lados.get(index);
+        return listaLados.get(index);
     }
 
     /**
-     * Devuelve el tamaño de la lista 'lados'
+     * Devuelve el tamaño de la lista que contiene sus aldos
      * @return
      */
     public int getSizeLados() {
-        if(this.lados == null) {
+        if(this.listaLados == null) {
             throw new NullPointerException("Instancia de clase Cuadrado: su lista de lados es null");
         }
-        return lados.size();
+        return listaLados.size();
     }
 }
