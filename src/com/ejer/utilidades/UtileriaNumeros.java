@@ -6,6 +6,7 @@ import java.util.Random;
 
 /**
  * Métodos para generar números aleatorios
+ * @author Luis Cueto
  */
 public class UtileriaNumeros {
     /**
@@ -38,9 +39,10 @@ public class UtileriaNumeros {
      * @param precision
      * @return
      */
-    public static BigDecimal generateNumerosDecimalesAleatorios(final int min, final int max, int precision) {
+    public static BigDecimal generateNumerosDecimalesAleatorios(final int min, final int max, final int precision) {
+        int auxPrecision = precision;
         if(precision < 0) {
-            precision = DEFAULT_PRECISION_DECIMALES;
+            auxPrecision = DEFAULT_PRECISION_DECIMALES;
         }
         int auxMin;
         int auxMax;
@@ -53,7 +55,7 @@ public class UtileriaNumeros {
         }
         Random random = new Random(System.nanoTime());
         double num = (random.nextDouble() * (auxMax - auxMin)) + auxMin;
-        return new BigDecimal(Double.toString(num)).setScale(precision, RoundingMode.HALF_UP);
+        return new BigDecimal(Double.toString(num)).setScale(auxPrecision, RoundingMode.HALF_UP);
     }
 
     /**
@@ -71,9 +73,9 @@ public class UtileriaNumeros {
     }
 
     /**
-     * Llama al constructor {@link #generateNumerosDecimalesAleatorios(int, int, int)}
-     * Utiliza {@link java.util.Random#Random} con el tiempo en nanosegundos como su semilla
+     * Llama al método {@link #generateNumerosDecimalesAleatorios(int, int, int)}
      * Utiliza {@link #DEFAULT_NUMALEATORIO_MIN}, {@link #DEFAULT_NUMALEATORIO_MAX} y {@link #DEFAULT_PRECISION_DECIMALES}
+     * Utiliza {@link java.util.Random#Random} con el tiempo en nanosegundos como su semilla
      * @return número decimal aleatorio entre los valores default que utiliza
      */
     public static BigDecimal generateDefaultNumerosDecimalesAleatorios() {

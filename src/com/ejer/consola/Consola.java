@@ -13,6 +13,7 @@ import java.util.Scanner;
 /**
  * Clase encargada de la interacción con el usuario
  * Lee las entradas del usuario para realizar las operacones necesarias
+ * @author Luis Cueto
  */
 public class Consola {
     //Opciones del menú

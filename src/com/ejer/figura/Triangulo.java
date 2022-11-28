@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Creación y operaciones con triángulos
+ * @author Luis Cueto
  */
 public class Triangulo implements IFiguraGeometrica {
     /**
